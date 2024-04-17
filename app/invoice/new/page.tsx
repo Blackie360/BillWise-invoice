@@ -14,6 +14,36 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 
 const New = () => {
   const [preview, setPreview] = useState(false)
+
+  const[formData, setFormData] = useState({
+    company: '',
+    name: '',
+    companyAddress: '',
+    city: '',
+    postalCode: '',
+    country: '',
+    clientCompany: '',
+    clientAddress: '',
+    clientCity: '',
+    clientPostalCode: '',
+    clientCountry: '',
+    invoiceNumber: '',
+    invoiceDate: '',
+    dueDate: ''
+  });
+
+function handleInputChange(e: { target: { name: any; value: any; }; }) {
+  const { name, value } = e.target;
+  // console.log(name, value);
+  setFormData({ ...formData, [name]: value });
+  // console.log(formData);
+}
+function handleFormSubmit(e: { preventDefault: () => void; }) {
+  e.preventDefault();
+  console.log(formData);
+  setPreview(!preview);
+}
+
   return (
     <div className='bg-slate-50 text-black py-8'>
   {/* header */}
@@ -68,16 +98,16 @@ const New = () => {
   {/* invoice form */}
   {
     preview ? (
-        <FormPreview />
+        <FormPreview data={formData}/>
 
     ) : (
-      <form className="w-full max-w-4xl p-4 bg-white border border-gray-600 rounded-lg shadow sm:p-6 md:p-8 mx-auto">
+      <form onSubmit={handleFormSubmit} className="w-full max-w-4xl p-4 bg-white border border-gray-600 rounded-lg shadow sm:p-6 md:p-8 mx-auto">
   {/* image & lebal */}
   <div className="flex justify-between items-center">
     {/* image */}
 
 <div className="flex items-center justify-center ">
-    <label for="dropzone-file" className="flex flex-col items-center justify-center w-48 h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
+    <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-48 h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
         <div className="flex flex-col items-center justify-center pt-5 pb-6">
         <FaCloudUploadAlt className="w-6 h-6  text-gray-500" />
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">upload Logo</span></p>
@@ -91,40 +121,97 @@ const New = () => {
 {/* Input fields */}
 <div className="flex flex-col w-1/2 mt-6">
   <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400"
-  type="text" placeholder="Your Company" />
-  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="Your Name"/>
-  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="Company Address"/>
-  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="City, Postal Code"/>
-  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text"  placeholder="Country eg. Kenya"/>
+  type="text" name="company"
+  onChange={handleInputChange}
+  value={formData.company}
+   placeholder="Your Company" />
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400"
+   type="text"
+   name="name"
+   onChange={handleInputChange}
+   value={formData.name}
+    placeholder="Your Name"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400"
+   type="text" 
+   name="companyAddress"
+   onChange={handleInputChange}
+   value={formData.companyAddress}
+   placeholder="Company Address"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
+  type="text" 
+  name="city"
+  onChange={handleInputChange}
+  value={formData.city}
+  placeholder="City, Postal Code"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
+  type="text"  
+  name="country"
+  onChange={handleInputChange}
+  value={formData.country}
+  placeholder="Country eg. Kenya"/>
 
 </div>
 {/* client details */}
 <div className="flex justify-between gap-4">
 <div className="flex flex-col w-1/2 mt-6">
   <h1 className="font-semibold">Bill to :</h1>
-  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="Your Client's Company"/>
-    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="Client'sAddress"/>
-  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="City, Postal Code"/>
-  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text"  placeholder="Country eg. Kenya"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400"
+   name="clientCompany" 
+    onChange={handleInputChange}
+    value={formData.clientCompany}
+   type="text" 
+   placeholder="Your Client's Company"/>
+    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
+    name="clientAddress" 
+    type="text" 
+    onChange={handleInputChange}
+    value={formData.clientAddress}
+    placeholder="Client'sAddress"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
+  name="clientCity" 
+  onChange={handleInputChange}
+  value={formData.clientCity}
+  type="text" placeholder="City, "/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400"
+   name="clientCountry"
+    onChange={handleInputChange}
+    value={formData.clientCountry}
+    type="text" 
+     placeholder="Country eg. Kenya"/>
 
 </div>
 <div className="flex flex-col w-1/2 mt-6">
   <div className="flex gap-2">
     <label className=" text-slate-600 font-bold" htmlFor="InvoiceNumber">Invoice # </label>
-    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="INV-022"/>
+    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
+    name="invoiceNumber" 
+    onChange={handleInputChange}
+    value={formData.invoiceNumber}
+    type="text" placeholder="INV-022"/>
   </div>
   <div className="flex gap-2">
     <label className=" text-slate-600 font-bold" htmlFor="InvoiceNumber">Invoice Date # </label>
-    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="date" />
+    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
+     name="invoiceDate"
+      onChange={handleInputChange}
+      value={formData.invoiceDate}
+      type="date" />
   </div>  
   <div className="flex gap-2">
     <label className=" text-slate-600 font-bold" htmlFor="InvoiceNumber"> Due Date # </label>
-    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="date" />
+    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
+    name="dueDate"
+    onChange={handleInputChange}
+    value={formData.dueDate}
+     type="date" />
   </div>
 
 </div>
 
 </div>
+<button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
+  Submit
+</button>
 
 </form>
     )
