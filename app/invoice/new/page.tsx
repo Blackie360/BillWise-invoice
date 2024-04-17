@@ -210,7 +210,7 @@ function handleFormSubmit(e: { preventDefault: () => void; }) {
 
 </div>
 <button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
-  Submit
+ Create Invoice 
 </button>
 
 </form>
