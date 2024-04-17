@@ -1,63 +1,68 @@
-import React from 'react';
-import { HiDownload, HiPrinter, HiEye, HiSave, HiMail } from 'react-icons/hi';
+
+import Navbar from "@/components/Navbar";
+import { FaDownload } from "react-icons/fa6";
+import { FaPrint } from "react-icons/fa6";
+import { MdPreview } from "react-icons/md";
+import { IoSaveSharp } from "react-icons/io5";
+import { MdOutlineSend } from "react-icons/md";
+
 
 const New = () => {
   return (
-    <div className="max-w-3xl mx-auto bg-slate-50 mt-16 shadow-md p-8 rounded-lg">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-4">
-        <div className="flex">
-          <button className="flex items-center mr-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-            <HiSave className="mr-1" /> Save
-          </button>
-          <button className="flex items-center mr-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-            <HiMail className="mr-1" /> Send
-          </button>
-        </div>
-        <div className="flex mt-4 md:mt-0">
-          <button className="flex items-center mr-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-            <HiDownload className="mr-1" /> Download
-          </button>
-          <button className="flex items-center mr-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-            <HiPrinter className="mr-1" /> Print
-          </button>
-          <button className="flex items-center bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-            <HiEye className="mr-1" /> Preview
-          </button>
-        </div>
-      </div>
-      <form>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <label htmlFor="companyName" className="block text-sm font-medium text-gray-700">Company Name</label>
-            <input type="text" id="companyName" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-          </div>
-          <div className="flex items-center justify-end">
-            <label htmlFor="logo" className="block text-sm font-medium text-gray-700">Company Logo</label>
-            <input type="file" id="logo" className="mt-1 ml-4 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          <div>
-            <label htmlFor="invoiceNumber" className="block text-sm font-medium text-gray-700">Invoice Number</label>
-            <input type="text" id="invoiceNumber" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-          </div>
-          <div>
-            <label htmlFor="amount" className="block text-sm font-medium text-gray-700">Amount</label>
-            <input type="text" id="amount" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          <div>
-            <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date</label>
-            <input type="date" id="date" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-          </div>
-        </div>
-        <div className="flex justify-end mt-8">
-          <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Submit</button>
-        </div>
-      </form>
-    </div>
-  );
-};
+    <div className='bg-slate-50 text-black py-8'>
+      <Navbar />
+  {/* header */}
+  <div className="flex justify-between items-center  md:py-8 px-4 md:px-16">
+  <div className="flex gap-4">
+   
+   <button className="flex items-center space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 ">
+       <MdPreview />
+       <span>Preview</span>
+       </button>
+   
+    <button className="flex items-center space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 ">
+    <FaPrint />
+       <span>Print</span>
+       </button>
+   
+     <button className="flex items-center space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 ">
+       <FaDownload />
+       <span>Download</span>
+       </button>
+   <div className="flex gap-4">
 
-export default New;
+   <button className="flex text-orange-600 font-semibold items-center space-x-2 px-3 py-2 shadow rounded-sm border border-purple-600 ">
+       <IoSaveSharp />
+ 
+       <span>Save Online</span>
+       </button>
+   
+       <button className="flex text-orange-600 font-semibold items-center space-x-2 px-3 py-2 shadow rounded-sm border border-purple-600 ">
+       <MdOutlineSend />
+       <span>Send</span>
+       </button>
+   </div>
+   
+ 
+   </div>
+  </div>
+  {/* invoice form */}
+  <div className=''>
+
+
+<div className="w-full max-w-sm p-4 bg-white border border-gray-600 rounded-lg shadow sm:p-6 md:p-8">
+    <form className="space-y-6" action="#">
+       
+    </form>
+</div>
+
+
+  </div>
+  {/* preview */}
+
+      <h1 className='text-black'>Creat New Invoice</h1>
+    </div>
+  )
+}
+
+export default New
