@@ -48,7 +48,7 @@ const New = () => {
        <FaDownload />
        <span>Download</span>
        </button>
-   <div className="flex gap-4">
+   <div className="flex gap-4 ">
 
    <button className="flex text-orange-600 font-semibold items-center space-x-2 px-3 py-2 shadow rounded-sm border border-purple-600 ">
        <IoSaveSharp />
@@ -86,11 +86,46 @@ const New = () => {
         <input id="dropzone-file" type="file" className="hidden" />
     </label>
 </div> 
-
-
-
     <h2 className="text-4xl uppercase font-bold">Invoice</h2>
   </div>
+{/* Input fields */}
+<div className="flex flex-col w-1/2 mt-6">
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400"
+  type="text" placeholder="Your Company" />
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="Your Name"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="Company Address"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="City, Postal Code"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text"  placeholder="Country eg. Kenya"/>
+
+</div>
+{/* client details */}
+<div className="flex justify-between gap-4">
+<div className="flex flex-col w-1/2 mt-6">
+  <h1 className="font-semibold">Bill to :</h1>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="Your Client's Company"/>
+    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="Client'sAddress"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="City, Postal Code"/>
+  <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text"  placeholder="Country eg. Kenya"/>
+
+</div>
+<div className="flex flex-col w-1/2 mt-6">
+  <div className="flex gap-2">
+    <label className=" text-slate-600 font-bold" htmlFor="InvoiceNumber">Invoice # </label>
+    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="text" placeholder="INV-022"/>
+  </div>
+  <div className="flex gap-2">
+    <label className=" text-slate-600 font-bold" htmlFor="InvoiceNumber">Invoice Date # </label>
+    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="date" />
+  </div>  
+  <div className="flex gap-2">
+    <label className=" text-slate-600 font-bold" htmlFor="InvoiceNumber"> Due Date # </label>
+    <input className="border-0 text-base p-1 mb-2 placeholder:italic placeholder:text-slate-400" type="date" />
+  </div>
+
+</div>
+
+</div>
+
 </form>
     )
   }
