@@ -8,7 +8,7 @@ const FormTable = () => {
 const[tableData,setTableData]=useState([
     {
       itemDescription: "",
-        Qty: "",
+      qty: "",
         unitPrice: "",
         tax: "",
         amount: "",
@@ -18,18 +18,37 @@ const[tableData,setTableData]=useState([
  const addRow = () => {
     setTableData([...tableData, {
         itemDescription: "",
-          Qty: "",
+        qty: "",
           unitPrice: "",
           tax: "",
           amount: "",
       }]);
   };
   //delete row
-  function removeRow(index) {
+  function removeRow(index: number) {
     const updatedData = [...tableData];
     updatedData.splice(index, 1);
     setTableData(updatedData);
   }
+  //input on change 
+  const handleInputChange = (index, e) => {
+    const { name, value } = e.target;
+    const updatedData = [...tableData];
+    updatedData[index][name] = value;
+
+    if (name === "qty" || name === "unitPrice") {
+      const qty = parseFloat(updatedData[index].qty);
+      const price = parseFloat(updatedData[index].unitPrice);
+      if (!isNaN(qty) && !isNaN(price)) {
+        updatedData[index].amount= (qty * price).toFixed(2);
+      } else {
+        updatedData[index].amount= "";
+      }
+    }
+
+    setTableData(updatedData);
+    console.log(updatedData)
+  };
 
   return (
     
@@ -68,13 +87,15 @@ const[tableData,setTableData]=useState([
                 placeholder="item description"
                 name="itemDescription"
                 value={row.itemDescription}
-                type="text" />
+                type="text"
+                onChange={(e) => handleInputChange(index, e)} />
                 </th>
                 <td className="px-6 py-4">
                 <input className="bg-transparent border-0 text-base h-7 w-12 p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
                 placeholder="2"
-                name="Qty"
-                value={row.Qty}
+                name="qty"
+                value={row.qty}
+                onChange={(e) => handleInputChange(index, e)}
                 type="number" />
                 </td>
                 <td className="px-6 py-4">
@@ -82,13 +103,15 @@ const[tableData,setTableData]=useState([
                 placeholder="5"
                 name="unitPrice"
                 value={row.unitPrice}
-                type="number" />
+                type="number" 
+                onChange={(e) => handleInputChange(index, e)}/>
                 </td>
                 <td className="px-6 py-4">
                 <input className="bg-transparent border-0 text-base h-7 w-24 p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
                 placeholder="2"
                 name="tax"
                 value={row.tax}
+                onChange={(e) => handleInputChange(index, e)}
                 type="number" />
                 </td>
                 <td className="px-6 py-4">
@@ -96,6 +119,7 @@ const[tableData,setTableData]=useState([
                 placeholder="2"
                 name="amount"
                 value={row.amount}
+                onChange={(e) => handleInputChange(index, e)}
                     type="number" />
                 </td>
                 <button  onClick={()=> removeRow(index) } type="button" className="rounded-full  p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6">
