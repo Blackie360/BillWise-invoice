@@ -1,10 +1,10 @@
 import { IoClose } from "react-icons/io5";
 import { CiCirclePlus } from "react-icons/ci";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 
 
-const FormTable = () => {
+const FormTable = ({updateTableData}: {updateTableData: (data: any) => void}) => {
 const[tableData,setTableData]=useState([
     {
       itemDescription: "",
@@ -19,19 +19,19 @@ const[tableData,setTableData]=useState([
     setTableData([...tableData, {
         itemDescription: "",
         qty: "",
-          unitPrice: "",
-          tax: "",
-          amount: "",
-      }]);
-  };
+        unitPrice: "",
+        tax: "",
+        amount: "",
+    }]);
+};
   //delete row
-  function removeRow(index: number) {
+function removeRow(index: number) {
     const updatedData = [...tableData];
     updatedData.splice(index, 1);
     setTableData(updatedData);
   }
   //input on change 
-  const handleInputChange = (index, e) => {
+  const handleInputChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const updatedData = [...tableData];
     updatedData[index][name] = value;
@@ -47,7 +47,8 @@ const[tableData,setTableData]=useState([
     }
 
     setTableData(updatedData);
-    console.log(updatedData)
+    updateTableData(updatedData);
+    
   };
 
   return (

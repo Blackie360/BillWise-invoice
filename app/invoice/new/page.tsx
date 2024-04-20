@@ -15,6 +15,7 @@ import FormTable from "@/components/FormTable";
 
 const New = () => {
   const [preview, setPreview] = useState(false)
+  const [tableData, setTableData] = useState([])
 
   const[formData, setFormData] = useState({
     company: '',
@@ -41,9 +42,18 @@ function handleInputChange(e: { target: { name: any; value: any; }; }) {
 }
 function handleFormSubmit(e: { preventDefault: () => void; }) {
   e.preventDefault();
-  console.log(formData);
+  const combineData = {
+    ...formData,
+    tableData
+  };
+  console.log("combineData" , combineData)
   setPreview(!preview);
 }
+ // Function to update tableData when called by the Table component
+ const updateTableData = (newTableData) => {
+  setTableData(newTableData);
+};
+console.log(tableData)
 
   return (
     <div className='bg-slate-50 text-black py-8'>
@@ -212,7 +222,7 @@ function handleFormSubmit(e: { preventDefault: () => void; }) {
 </div>
 {/*   Table */}
 
-<FormTable />
+<FormTable updateTableData={updateTableData} />
 
 <button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
  Create Invoice 
