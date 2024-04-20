@@ -1,5 +1,6 @@
 import FAQ from "@/components/FAQ";
-import Features from "@/components/Feautures";
+import Features from "@/components/Features";
+
 import Hero from "@/components/Hero";
 import InvoiceCTA from "@/components/InvoiceCTA";
 import Navbar from "@/components/Navbar";
@@ -9,7 +10,7 @@ import Steps from "@/components/Steps";
 export default function Home() {
   return (
     <div>
-      <Navbar />
+      
       <Hero />
       <Steps />
       <InvoiceCTA />

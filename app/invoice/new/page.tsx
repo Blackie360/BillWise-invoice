@@ -9,6 +9,7 @@ import { MdOutlineSend } from "react-icons/md";
 import { useState } from "react";
 import FormPreview from "@/components/FormPreview";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import FormTable from "@/components/FormTable";
 
 
 
@@ -209,6 +210,10 @@ function handleFormSubmit(e: { preventDefault: () => void; }) {
 </div>
 
 </div>
+{/*   Table */}
+
+<FormTable />
+
 <button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
  Create Invoice 
 </button>
