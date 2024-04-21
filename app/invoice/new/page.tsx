@@ -10,7 +10,7 @@ import { useState } from "react";
 import FormPreview from "@/components/FormPreview";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import FormTable from "@/components/FormTable";
-import { CldUploadButton } from "next-cloudinary";
+import { CldImage, CldUploadButton } from "next-cloudinary";
 
 
 
@@ -120,7 +120,17 @@ console.log(tableData)
     {/* image */}
 
 <div className="flex items-center justify-center ">
-<label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full md:w-64 h-48 md:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
+{
+  logoUrl ? (
+    <CldImage
+        width="240"
+        height="240"
+        src={logoUrl}
+        alt="invoice logo"
+          />
+
+  ): (
+    <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full md:w-64 h-48 md:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
     <div className="flex flex-col items-center justify-center pt-5 pb-6">
         <FaCloudUploadAlt className="w-8 h-8 text-gray-500" />
         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
@@ -139,6 +149,8 @@ console.log(tableData)
     </div>
 </label>
 
+  )
+}
 </div> 
     <h2 className="text-4xl uppercase font-bold">Invoice</h2>
   </div>
