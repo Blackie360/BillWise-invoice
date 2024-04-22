@@ -100,7 +100,7 @@ function removeRow(index: number) {
                 type="number" />
                 </td>
                 <td className="px-6 py-4">
-                <input className="bg-transparent border-0 text-base h-7 w-12 p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
+                <input className="g-transparent border-0 text-base h-7 w-24 p-1 mb-2 placeholder:italic placeholder:text-slate-400" 
                 placeholder="5"
                 name="unitPrice"
                 value={row.unitPrice}

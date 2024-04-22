@@ -18,6 +18,7 @@ const New = () => {
   const [preview, setPreview] = useState(false)
   const [tableData, setTableData] = useState([])
   const[logoUrl, setLogoUrl] = useState('');
+  const[combineData, setCombineData] = useState({})
 
   const[formData, setFormData] = useState({
     company: '',
@@ -44,13 +45,15 @@ function handleInputChange(e: { target: { name: any; value: any; }; }) {
 }
 function handleFormSubmit(e: { preventDefault: () => void; }) {
   e.preventDefault();
-  const combineData = {
+  const allFormData = {
     ...formData,
+    logoUrl,
     tableData
   };
-  console.log("combineData" , combineData)
+  setCombineData(allFormData);
   setPreview(!preview);
 }
+console.log(combineData)
  // Function to update tableData when called by the Table component
  const updateTableData = (newTableData) => {
   setTableData(newTableData);
@@ -111,7 +114,7 @@ console.log(tableData)
   {/* invoice form */}
   {
     preview ? (
-        <FormPreview data={formData}/>
+        <FormPreview data={combineData}/>
 
     ) : (
       <form onSubmit={handleFormSubmit} className="w-full max-w-4xl p-4 bg-white border border-gray-600 rounded-lg shadow sm:p-6 md:p-8 mx-auto">
