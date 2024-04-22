@@ -71,12 +71,11 @@ console.log("Total Sum:", totalSum);
             <td className="px-6 py-4">
               
             </td>
-            <td className="px-6 py-4 font-bold text-xl uppercase">
+            <td className="px-6 py-4 font-bold text-slate-900 text-xl uppercase">
               Total Amount:
             </td>
-            <td className="px-6 py-4 font-bold text-xl">
-              $99
-            </td>
+            <td className="px-6 py-4 text-slate-900 font-bold text-xl">
+              KES {totalSum}            </td>
           </tr>
           
         </tbody>
