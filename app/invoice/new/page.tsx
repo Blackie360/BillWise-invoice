@@ -1,7 +1,7 @@
 "use client";
 
 import { FaEdit } from "react-icons/fa";
-import { FaDownload } from "react-icons/fa6";
+import ReactToPrint from 'react-to-print';
 import { FaPrint } from "react-icons/fa6";
 import { MdPreview } from "react-icons/md";
 import { IoSaveSharp } from "react-icons/io5";
@@ -87,13 +87,10 @@ console.log(tableData)
    
     <button className="flex items-center space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 ">
     <FaPrint />
-       <span>Print</span>
+       <span>Print/Download</span>
        </button>
    
-     <button className="flex items-center space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 ">
-       <FaDownload />
-       <span>Download</span>
-       </button>
+     
    <div className="flex gap-4 ">
 
    <button className="flex text-orange-600 font-semibold items-center space-x-2 px-3 py-2 shadow rounded-sm border border-purple-600 ">

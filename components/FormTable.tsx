@@ -1,3 +1,4 @@
+"use client";
 import { IoClose } from "react-icons/io5";
 import { CiCirclePlus } from "react-icons/ci";
 import { ChangeEvent, useState } from "react";
