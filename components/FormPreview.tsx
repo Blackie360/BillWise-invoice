@@ -113,7 +113,9 @@ const FormPreview = ({ data }: { data: any }) => {
     <h1 className="font-semibold">Terms</h1>
     <p>{terms}</p>
   </div>
+  
 </div>
+<footer className="text-right text-gray-600 flex justify-end mt-4">Powered by <span className='text-orange-600 text-base '>Billwise</span></footer>
 
       
     </div>

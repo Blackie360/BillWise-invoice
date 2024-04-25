@@ -29,7 +29,7 @@ const New = () => {
     name: '',
     companyAddress: '',
     city: '',
-    postalCode: '',
+   
     country: '',
     clientCompany: '',
     clientAddress: '',
@@ -49,7 +49,7 @@ function handleInputChange(e: { target: { name: any; value: any; }; }) {
   setFormData({ ...formData, [name]: value });
   // console.log(formData);
 }
-function handleFormSubmit(e: { preventDefault: () => void; }) {
+async function handleFormSubmit(e: { preventDefault: () => void; }) {
   e.preventDefault();
   const allFormData = {
     ...formData,
@@ -57,6 +57,29 @@ function handleFormSubmit(e: { preventDefault: () => void; }) {
     tableData
   };
   setCombineData(allFormData);
+
+  try {
+    const response = await fetch('http://localhost:3000/api/invoice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        invoiceData: {
+          ...formData,
+          logoUrl,
+        },
+        tableData,
+      }),
+    });
+    if (response.ok) {
+      console.log('Invoice created successfully');
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+
   setPreview(!preview);
 }
 console.log(combineData)
@@ -282,6 +305,8 @@ const handlePrint = useReactToPrint({
         ></textarea>
       </div>
     </div>
+    <footer className="text-right text-gray-600 mt-4">Powered by <span className='text-orange-600 text-base '>Billwise</span></footer>
+
 
 <button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
  Create Invoice 

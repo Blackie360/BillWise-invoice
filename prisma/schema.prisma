@@ -14,24 +14,27 @@ datasource db {
 }
 
 model Invoice {
-  id           Int      @id @default(autoincrement())
-  company       String
-  name           String
-  postalcode      String
-  companyAddress String
-  city           String
-  country        String
-  clientCompany String
-  clientAddress String
-  clientCity    String
-  clientCountry String
-  clientPostalCode  String
-  invoiceNumber String
-  invoiceDate   DateTime
-  dueDate       DateTime
-  logoUrl       String
-  tableData    Row[]   // Define a one-to-many relationship to Row
+  id               Int      @id @default(autoincrement())
+  company          String
+  name             String
+  postalCode       String?
+  companyAddress   String
+  city             String
+  country          String
+  clientCompany    String
+  clientAddress    String
+  clientCity       String
+  clientCountry    String
+  clientPostalCode String
+  invoiceNumber    String
+  invoiceDate      DateTime
+  dueDate          DateTime
+  logoUrl          String
+  notes            String
+  terms            String
+  tableData        Row[]   // Define a one-to-many relationship to Row
 }
+
 
 model Row {
   id            Int       @id @default(autoincrement())
