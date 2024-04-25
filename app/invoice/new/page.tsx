@@ -38,6 +38,8 @@ const New = () => {
     clientCountry: '',
     invoiceNumber: '',
     invoiceDate: '',
+    notes: '',
+    terms: '',
     dueDate: ''
   });
 
@@ -255,9 +257,36 @@ const handlePrint = useReactToPrint({
 
 <FormTable updateTableData={updateTableData} />
 
+{/* notes and condition terms */}
+<div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col w-full lg:w-1/2">
+        <label htmlFor="notes" className="text-lg font-bold mb-2">Notes</label>
+        <textarea
+          id="notes"
+          rows={4}
+          name="notes"
+          onChange={handleInputChange}
+          className="border border-gray-300 rounded-lg p-2 h-32 resize-none"
+          placeholder="Enter your notes here..."
+        ></textarea>
+      </div>
+      <div className="flex flex-col w-full lg:w-1/2">
+        <label htmlFor="terms" className="text-lg font-bold mb-2">Terms and Conditions</label>
+        <textarea
+          id="terms"
+          rows={4}
+          name="terms"
+          onChange={handleInputChange}
+          className="border border-gray-300 rounded-lg p-2 h-32 resize-none"
+          placeholder="Enter terms and conditions here..."
+        ></textarea>
+      </div>
+    </div>
+
 <button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
  Create Invoice 
 </button>
+
 
 </form>
     )

@@ -18,6 +18,8 @@ const FormPreview = ({ data }: { data: any }) => {
     invoiceDate,
     dueDate,
     logoUrl,
+    notes,
+    terms,
     tableData,
   } = data;
 
@@ -100,6 +102,20 @@ const FormPreview = ({ data }: { data: any }) => {
       </div>
       {/* Table */}
       <PreviewTable tableData={tableData} />
+      <div className="flex gap-4">
+  {/* Notes */}
+  <div className="flex-1 mt-6 text-black border border-gray-300 rounded-lg p-2 h-32 resize-none">
+    <h1 className="font-semibold">Notes</h1>
+    <p>{notes}</p>
+  </div>
+  {/* Terms */}
+  <div className="flex-1 mt-6 text-black border border-gray-300 rounded-lg p-2 h-32 resize-none">
+    <h1 className="font-semibold">Terms</h1>
+    <p>{terms}</p>
+  </div>
+</div>
+
+      
     </div>
   );
 }
