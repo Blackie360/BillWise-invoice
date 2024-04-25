@@ -1,16 +1,18 @@
 "use client";
 
 import { FaEdit } from "react-icons/fa";
-import ReactToPrint from 'react-to-print';
+import { useReactToPrint } from 'react-to-print';
 import { FaPrint } from "react-icons/fa6";
 import { MdPreview } from "react-icons/md";
 import { IoSaveSharp } from "react-icons/io5";
 import { MdOutlineSend } from "react-icons/md";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import FormPreview from "@/components/FormPreview";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import FormTable from "@/components/FormTable";
 import { CldImage, CldUploadButton } from "next-cloudinary";
+
+
 
 
 
@@ -19,6 +21,8 @@ const New = () => {
   const [tableData, setTableData] = useState([])
   const[logoUrl, setLogoUrl] = useState('');
   const[combineData, setCombineData] = useState({})
+  const invoiceRef = useRef();
+
 
   const[formData, setFormData] = useState({
     company: '',
@@ -59,6 +63,11 @@ console.log(combineData)
   setTableData(newTableData);
 };
 console.log(tableData)
+//print function
+const handlePrint = useReactToPrint({
+  content: () => invoiceRef.current,
+});
+
 
   return (
     <div className='bg-slate-50 text-black py-8'>
@@ -85,7 +94,7 @@ console.log(tableData)
 
        </button>
    
-    <button className="flex items-center space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 ">
+    <button onClick={handlePrint} className="flex items-center space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 ">
     <FaPrint />
        <span>Print/Download</span>
        </button>
@@ -111,7 +120,9 @@ console.log(tableData)
   {/* invoice form */}
   {
     preview ? (
-        <FormPreview data={combineData}/>
+        <div ref={invoiceRef} className="">
+          <FormPreview data={combineData}/>
+        </div>
 
     ) : (
       <form onSubmit={handleFormSubmit} className="w-full max-w-4xl p-4 bg-white border border-gray-600 rounded-lg shadow sm:p-6 md:p-8 mx-auto">
@@ -130,24 +141,19 @@ console.log(tableData)
           />
 
   ): (
-    <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full md:w-64 h-48 md:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
-    <div className="flex flex-col items-center justify-center pt-5 pb-6">
-        <FaCloudUploadAlt className="w-8 h-8 text-gray-500" />
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-            <CldUploadButton
+    <div>
+      <CldUploadButton
+            className='mb-2 text-sm text-gray-500 dark:text-gray-400
+            flex flex-col items-center justify-center w-full md:w-64 h-48 md:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100'
                 onUpload={(data) => {
                     console.log(data);
                     if (typeof data.info !== 'string') {
                         setLogoUrl(data.info?.secure_url || ''); // Fix: Provide a default value of an empty string
                     }
                 }}
-                className='text-white mb-2 py-2 px-4 rounded-lg '
                 uploadPreset="Invoicepreset"
             />
-        </p>
-        <p className="text-xs text-gray-500 dark:text-gray-400">PNG or JPG (MAX. 240x240px)</p>
-    </div>
-</label>
+      </div>
 
   )
 }
