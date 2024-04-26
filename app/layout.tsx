@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +23,10 @@ export default function RootLayout({
     suppressHydrationWarning>
     
       <body className={inter.className}>
+      <Toaster
+      position="top-right"
+      reverseOrder={false}
+      />  
       <Navbar />
         {children}
         <Footer />

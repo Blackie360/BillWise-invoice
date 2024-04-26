@@ -31,3 +31,9 @@ body {
     text-wrap: balance;
   }
 }
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Use 100% of the viewport height */
+}

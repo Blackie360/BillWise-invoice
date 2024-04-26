@@ -11,6 +11,11 @@ import FormPreview from "@/components/FormPreview";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import FormTable from "@/components/FormTable";
 import { CldImage, CldUploadButton } from "next-cloudinary";
+import toast from "react-hot-toast";
+import Lottie from 'lottie-react';
+import loading from '@/public/loading.json';
+import Loading from "@/components/Loading";
+import { useEffect } from "react";
 
 
 
@@ -22,6 +27,7 @@ const New = () => {
   const[logoUrl, setLogoUrl] = useState('');
   const[combineData, setCombineData] = useState({})
   const invoiceRef = useRef();
+  const [loading, setLoading] = useState(false);
 
 
   const[formData, setFormData] = useState({
@@ -50,6 +56,7 @@ function handleInputChange(e: { target: { name: any; value: any; }; }) {
   // console.log(formData);
 }
 async function handleFormSubmit(e: { preventDefault: () => void; }) {
+  setLoading(true);
   e.preventDefault();
   const allFormData = {
     ...formData,
@@ -73,14 +80,16 @@ async function handleFormSubmit(e: { preventDefault: () => void; }) {
       }),
     });
     if (response.ok) {
-      console.log('Invoice created successfully');
+      setLoading(false);
+      toast.success('Invoice created successfully🚀');
+      setPreview(!preview);
     }
   } catch (error) {
     console.log(error);
     
   }
 
-  setPreview(!preview);
+ 
 }
 console.log(combineData)
  // Function to update tableData when called by the Table component
@@ -92,6 +101,14 @@ console.log(tableData)
 const handlePrint = useReactToPrint({
   content: () => invoiceRef.current,
 });
+// Set the timeout to  (2 seconds) 
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setLoading(false);
+  }, 2000); 
+  return () => clearTimeout(timer);
+}, []);
 
 
   return (
@@ -305,12 +322,25 @@ const handlePrint = useReactToPrint({
         ></textarea>
       </div>
     </div>
+
     <footer className="text-right text-gray-600 mt-4">Powered by <span className='text-orange-600 text-base '>Billwise</span></footer>
 
+{/* loading  */}
 
-<button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
- Create Invoice 
-</button>
+{loading ? (
+           <div className="fixed inset-0 flex justify-center items-center bg-gray-900 bg-opacity-50 z-50">
+            <Loading />
+           </div>
+          ) : (
+            <button
+              className="bg-orange-600 py-2.5 px-6 text-white rounded"
+              type="submit"
+            >
+              Create Invoice
+            </button>
+          )}
+
+
 
 
 </form>
