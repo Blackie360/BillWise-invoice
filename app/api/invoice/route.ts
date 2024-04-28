@@ -1,5 +1,7 @@
 import db from "@/app/libs/db";
 import { NextResponse } from "next/server";
+const { createHash } = require('crypto');
+
 
 export async function POST(request: { json: () => PromiseLike<{ invoiceData: any; tableData: any; }> | { invoiceData: any; tableData: any; }; }) {
     
@@ -52,16 +54,12 @@ export async function POST(request: { json: () => PromiseLike<{ invoiceData: any
         // Use Promise.all to await all row creation promises
         const rows = await Promise.all(rowsPromise);
         console.log(invoice, rows);
+        const data={
+            invoice,
+            rows,
+        }
 
-        return NextResponse.json(
-            {
-                invoice,
-                rows,
-            },
-            {
-                status: 201,
-            }
-        );
+        return NextResponse.json(data, {status: 201});
         
     } catch (error) {
         console.log(error);
@@ -70,4 +68,25 @@ export async function POST(request: { json: () => PromiseLike<{ invoiceData: any
         }, {status: 500});
     }
 
+}
+
+export async function  GET(request){
+   try {
+    const invoices = await db.invoice.findMany({
+        include:{
+            tableData: true,
+        },
+    });
+    console.log(invoices);
+    return NextResponse.json(invoices, {status: 201});
+    
+   } catch (error) {
+    console.log(error);
+    return NextResponse.json({
+
+        message: "Error fetching invoices",
+        error,
+    }, {status: 500});
+    
+   }
 }

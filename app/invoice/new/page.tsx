@@ -85,7 +85,8 @@ async function handleFormSubmit(e: { preventDefault: () => void; }) {
       setPreview(!preview);
     }
   } catch (error) {
-    console.log(error);
+    setLoading(false);
+   toast.error('An error occurred while creating the invoice');
     
   }
 
