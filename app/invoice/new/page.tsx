@@ -13,7 +13,6 @@ import FormTable from "@/components/FormTable";
 import { CldImage, CldUploadButton } from "next-cloudinary";
 import toast from "react-hot-toast";
 import Lottie from 'lottie-react';
-import loading from '@/public/loading.json';
 import Loading from "@/components/Loading";
 import { useEffect } from "react";
 
@@ -107,7 +106,7 @@ const handlePrint = useReactToPrint({
 useEffect(() => {
   const timer = setTimeout(() => {
     setLoading(false);
-  }, 2000); 
+  }, 1000); 
   return () => clearTimeout(timer);
 }, []);
 

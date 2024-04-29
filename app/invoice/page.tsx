@@ -16,7 +16,7 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="container max-w-4xl mx-auto mt-16 rounded-lg bg-white text-black ">
+    <div className="container max-w-4xl mx-auto mt-16 rounded-lg bg-white text-black font-semibold text-2xl ">
       <div className="flex justify-between items-center mb-4">
         <div className="text-lg font-semibold">Your Invoices ({invoices.length})</div>
         <Link
@@ -27,7 +27,7 @@ const Page = () => {
         </Link>
       </div>
       <div className="overflow-x-auto shadow-md rounded-lg bg-white">
-        <table className="w-full text-sm text-left">
+      <table className="w-full text-sm text-left bg-cover bg-center" style={{ backgroundImage: 'url("https://cdn.pixabay.com/photo/2017/03/08/14/20/flat-2126884_640.png")' }}>
           <thead className="text-xs uppercase bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3">
@@ -45,20 +45,23 @@ const Page = () => {
             </tr>
           </thead>
           <tbody>
-            {invoices.map((invoice) => {
+            {invoices.map((invoice, index) => {
               const options = { year: 'numeric', month: 'long', day: 'numeric' };
               const invoiceDate = new Date(invoice.invoiceDate).toLocaleDateString(undefined, options);
               return (
-                <tr key={invoice.id}>
-                  <td className="px-6 py-4">{invoice.id}</td>
-                  <td className="px-6 py-4">{invoice.clientCompany}</td>
-                  <td className="px-6 py-4">{invoiceDate}</td>
-                  <td className="px-6 py-4 text-right">
-                    <a href={`/invoice/${invoice.id}`} className="font-medium text-blue-600 hover:underline">
-                      view
-                    </a>
-                  </td>
-                </tr>
+                <React.Fragment key={invoice.id}>
+                  <tr>
+                    <td className="px-6 py-4">{invoice.id}</td>
+                    <td className="px-6 py-4">{invoice.clientCompany}</td>
+                    <td className="px-6 py-4">{invoiceDate}</td>
+                    <td className="px-6 py-4 text-right">
+                      <a href={`/invoice/${invoice.id}`}>
+                        <a className="font-medium text-orange-600 text-xl hover:underline">View</a>
+                      </a>
+                    </td>
+                  </tr>
+                  {index !== invoices.length - 1 && <tr><td colSpan="4" className="border-b"></td></tr>}
+                </React.Fragment>
               );
             })}
           </tbody>
