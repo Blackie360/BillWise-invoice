@@ -1,19 +1,27 @@
 "use client";
+
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaArrowDown } from 'react-icons/fa';
 import { getInvoices } from '../libs/getInvoices';
+import Loading from '@/components/Loading';
 
 const Page = () => {
   const [invoices, setInvoices] = useState([]);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchInvoices = async () => {
       const invoicesData = await getInvoices();
       setInvoices(invoicesData);
+      setLoading(false); 
     };
     fetchInvoices();
   }, []);
+
+  if (loading) {
+    return <Loading />; // Show loading component while fetching invoices
+  }
 
   return (
     <div className="container max-w-4xl mx-auto mt-16 rounded-lg bg-white text-black font-semibold text-2xl ">
@@ -27,7 +35,7 @@ const Page = () => {
         </Link>
       </div>
       <div className="overflow-x-auto shadow-md rounded-lg bg-white">
-      <table className="w-full text-sm text-left bg-cover bg-center" style={{ backgroundImage: 'url("https://cdn.pixabay.com/photo/2017/03/08/14/20/flat-2126884_640.png")' }}>
+        <table className="w-full text-sm text-left bg-cover bg-center" style={{ backgroundImage: 'url("https://cdn.pixabay.com/photo/2017/03/08/14/20/flat-2126884_640.png")' }}>
           <thead className="text-xs uppercase bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3">
