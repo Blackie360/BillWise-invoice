@@ -27,7 +27,7 @@ const InvoicePage = ({ params: { id } }: { params: { id: string } }) => {
   return (
     <div className='my-4'>
      <div className="">
-     <Buttons />
+     <Buttons invoiceId={invoice.id}/>
      </div>
       <div className="">
         <FormPreview data={invoice} />

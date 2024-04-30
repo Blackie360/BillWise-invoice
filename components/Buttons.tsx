@@ -1,10 +1,11 @@
 "use client";
 import React, { useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaPrint } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { useReactToPrint } from 'react-to-print';
 
-const Buttons = () => {
+const Buttons = ({invoiceId}: {invoiceId: string}) => {
     const invoiceRef = useRef();
     const [showForm, setShowForm] = useState(false);
     const[email, setEmail] = useState('');
@@ -13,8 +14,30 @@ const Buttons = () => {
         setShowForm(true);
     };
     async function handleSendMail(e) {
+     try {
+        
         e.preventDefault();
-        console.log(email);
+        const baseUrl = 'http://localhost:3000';
+        const invoiceUrl = `${baseUrl}/invoice/${invoiceId}`;
+        console.log(email, invoiceUrl);
+        const response = await fetch("http://localhost:3000/api/send", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email, invoiceUrl}),
+        });
+        if(response.ok){
+            console.log(response)
+            toast.success('Invoice sent successfully');
+            setShowForm(false);
+            setEmail('');
+            
+        }
+     } catch (error) {
+            console.log(error);
+            toast.error('Failed to send invoice');
+     }
     }
 
     return (
@@ -36,6 +59,7 @@ const Buttons = () => {
                             </div>
                             <input onChange={(e)=>setEmail(e.target.value)} 
                             value={email}
+                            required
                             type="text" id="input-group-1" 
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="name@gmail.com"/>
                         </div>
@@ -43,7 +67,7 @@ const Buttons = () => {
                             type='submit'
                             className="flex text-orange-600 font-semibold items-center space-x-2 px-3 py-2 shadow rounded-sm border border-purple-600">
                             <MdEmail />
-                            <span className="hidden lg:inline">Send</span>
+                            <span className="hidden lg:inline">Send Email</span>
                         </button>
                     </form>
                 ) : (
