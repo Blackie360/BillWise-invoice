@@ -5,39 +5,42 @@ import { FaPrint } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { useReactToPrint } from 'react-to-print';
 
-const Buttons = ({invoiceId}: {invoiceId: string}) => {
+const Buttons = ({ invoiceId }: { invoiceId: string }) => {
     const invoiceRef = useRef();
     const [showForm, setShowForm] = useState(false);
-    const[email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSendClick = () => {
         setShowForm(true);
     };
+
     async function handleSendMail(e) {
-     try {
-        
-        e.preventDefault();
-        const baseUrl = 'http://localhost:3000';
-        const invoiceUrl = `${baseUrl}/invoice/${invoiceId}`;
-        console.log(email, invoiceUrl);
-        const response = await fetch("http://localhost:3000/api/send", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({email, invoiceUrl}),
-        });
-        if(response.ok){
-            console.log(response)
-            toast.success('Invoice sent successfully');
-            setShowForm(false);
-            setEmail('');
-            
-        }
-     } catch (error) {
+        try {
+            e.preventDefault();
+            setLoading(true); // Set loading state to true
+            const baseUrl = 'http://localhost:3000';
+            const invoiceUrl = `${baseUrl}/invoice/${invoiceId}`;
+            console.log(email, invoiceUrl);
+            const response = await fetch("http://localhost:3000/api/send", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, invoiceUrl }),
+            });
+            if (response.ok) {
+                console.log(response)
+                toast.success('Invoice sent successfully');
+                setShowForm(false);
+                setEmail('');
+            }
+        } catch (error) {
             console.log(error);
             toast.error('Failed to send invoice');
-     }
+        } finally {
+            setLoading(false); // Set loading state back to false
+        }
     }
 
     return (
@@ -57,21 +60,22 @@ const Buttons = ({invoiceId}: {invoiceId: string}) => {
                                     <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
                                 </svg>
                             </div>
-                            <input onChange={(e)=>setEmail(e.target.value)} 
-                            value={email}
-                            required
-                            type="text" id="input-group-1" 
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="name@gmail.com"/>
+                            <input
+                                onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                required
+                                type="text"
+                                id="input-group-1"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="name@gmail.com" />
                         </div>
-                        <button 
+                        <button
                             type='submit'
                             className="flex text-orange-600 font-semibold items-center space-x-2 px-3 py-2 shadow rounded-sm border border-purple-600">
-                            <MdEmail />
-                            <span className="hidden lg:inline">Send Email</span>
+                            {loading ? 'Sending...' : <><MdEmail /><span className="hidden lg:inline">Send Email</span></>}
                         </button>
                     </form>
                 ) : (
-                    <button 
+                    <button
                         onClick={handleSendClick}
                         className="flex text-red-600 font-semibold items-center space-x-2 px-3 py-2 shadow rounded-sm border border-purple-600">
                         <MdEmail />
