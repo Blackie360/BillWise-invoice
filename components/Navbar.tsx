@@ -5,6 +5,7 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { MdOutlineFeaturedPlayList } from 'react-icons/md';
 import { IoLogIn } from 'react-icons/io5';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,7 +43,12 @@ const Navbar = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
+const pathname = usePathname();
+if (pathname.startsWith('/invoice/')&&
+pathname !== '/invoice/new'
+) {
+  return null;
+}
   return (
     <header className=" text-white">
       <div className="container mx-auto flex items-center justify-between py-4">

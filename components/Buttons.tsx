@@ -39,7 +39,7 @@ const Buttons = ({ invoiceId }: { invoiceId: string }) => {
             console.log(error);
             toast.error('Failed to send invoice');
         } finally {
-            setLoading(false); // Set loading state back to false
+            setLoading(false); 
         }
     }
 
