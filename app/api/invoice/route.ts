@@ -17,6 +17,7 @@ export async function POST(request: { json: () => PromiseLike<{ invoiceData: any
         //create invoice using invoiceData
         const invoice = await db.invoice.create({
             data:{
+                userId:parseInt(invoiceData.userId),
                 company: invoiceData.company,
                 name: invoiceData.name,
                 companyAddress: invoiceData.companyAddress,

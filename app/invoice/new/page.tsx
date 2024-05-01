@@ -2,7 +2,7 @@
 
 import { FaEdit } from "react-icons/fa";
 import { useReactToPrint } from 'react-to-print';
-import { FaPrint } from "react-icons/fa6";
+import { FaPrint, FaRegFileLines } from "react-icons/fa6";
 import { MdPreview } from "react-icons/md";
 import { IoSaveSharp } from "react-icons/io5";
 import { MdOutlineSend } from "react-icons/md";
@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import Lottie from 'lottie-react';
 import Loading from "@/components/Loading";
 import { useEffect } from "react";
+import Link from "next/link";
 
 
 
@@ -79,6 +80,8 @@ async function handleFormSubmit(e: { preventDefault: () => void; }) {
       }),
     });
     if (response.ok) {
+      const createdInvoice= await response.json();
+      console.log('createdinvoice ', createdInvoice);
       setLoading(false);
       toast.success('Invoice created successfully🚀');
       setPreview(!preview);
@@ -112,13 +115,14 @@ useEffect(() => {
 
 
   return (
-    <div className='bg-slate-50 text-black py-8'>
+    <div className='bg-slate-50 text-black py-8 overflow-y-auto'>
   {/* header */}
-  <div className="flex justify-between items-center md:py-8 px-4 md:px-16 mb-6">
+ 
+<div className="flex justify-between items-center md:py-8 px-4 md:px-16 mb-6">
   <div className="flex">
     <button
       onClick={() => setPreview(!preview)}
-      className="px-3 py-2 shadow rounded-sm border border-slate-600"
+      className="px-3 py-2 shadow rounded-sm border border-slate-600 mr-2 md:mr-0 md:mb-0 mb-2 md:mb-0"
     >
       {preview ? (
         <div className="flex items-center space-x-2">
@@ -133,17 +137,26 @@ useEffect(() => {
       )}
     </button>
   </div>
-
+  <div className="flex">
+    <Link
+      href="/invoice/7"
+      className="flex items-end space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 mr-2 md:mr-0 md:mb-0 mb-2 md:mb-0"
+    >
+      <FaRegFileLines />
+      <span>View Invoice</span>
+    </Link>
+  </div>
   <div className="flex">
     <button
       onClick={handlePrint}
-      className="flex items-end space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600"
+      className="flex items-end space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 mr-2 md:mr-0 md:mb-0 mb-2 md:mb-0"
     >
       <FaPrint />
       <span>Print/Download</span>
     </button>
   </div>
 </div>
+
 
   {/* invoice form */}
   {

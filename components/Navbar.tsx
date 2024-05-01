@@ -24,9 +24,9 @@ const Navbar = () => {
     } else if (scrollY >= 600 && scrollY < 1200) {
       setActiveSection('pricing');
     } else if (scrollY >= 1200 && scrollY < 1800) {
-      setActiveSection('login');
+      setActiveSection('/login');
     } else {
-      setActiveSection('register');
+      setActiveSection('/register');
     }
   };
 
@@ -69,14 +69,18 @@ pathname !== '/invoice/new'
             <RiMoneyDollarCircleFill className="mr-1" />
             Pricing
           </button>
-          <button onClick={() => scrollToSection('login')} className={`flex items-center ${activeSection === 'login' ? 'font-bold' : ''}`}>
+          <Link 
+            href="/login"
+           className={`flex items-center ${activeSection === 'login' ? 'font-bold' : ''}`}>
             <IoLogIn className="mr-1" />
             Login
-          </button>
-          <button onClick={() => scrollToSection('register')} className={`flex items-center ${activeSection === 'register' ? 'font-bold' : ''}`}>
+          </Link>
+          <Link 
+            href="/register"
+           className={`flex items-center ${activeSection === 'register' ? 'font-bold' : ''}`}>
             <IoLogIn className="mr-1" />
             Register
-          </button>
+          </Link>
         </nav>
       </div>
     </header>
