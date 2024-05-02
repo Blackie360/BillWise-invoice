@@ -24,6 +24,7 @@ import { useSession } from "next-auth/react";
 
 const New = () => {
   const { data: session, status } = useSession();
+  const [userId, setUserId] = useState();
   const [preview, setPreview] = useState(false)
   const [tableData, setTableData] = useState([])
   const[logoUrl, setLogoUrl] = useState('');
@@ -57,15 +58,21 @@ function handleInputChange(e: { target: { name: any; value: any; }; }) {
   setFormData({ ...formData, [name]: value });
   // console.log(formData);
 }
+
+
+
 async function handleFormSubmit(e: { preventDefault: () => void; }) {
+  const userId =await session?.user?.email;
   setLoading(true);
   e.preventDefault();
   const allFormData = {
     ...formData,
     logoUrl,
+    userId,
     tableData
   };
   setCombineData(allFormData);
+  
 
   try {
     const response = await fetch('http://localhost:3000/api/invoice', {
@@ -77,6 +84,7 @@ async function handleFormSubmit(e: { preventDefault: () => void; }) {
         invoiceData: {
           ...formData,
           logoUrl,
+          userId
         },
         tableData,
       }),
@@ -115,9 +123,9 @@ useEffect(() => {
   return () => clearTimeout(timer);
 }, []);
 
-if (status === "loading") {
-  return <Loading />;
-}
+// if (status === "loading") {
+//   return <Loading />;
+// }
 if (status === "unauthenticated") {
   return (
     <div className="gap-8 flex items-center h-screen justify-center flex-col">
