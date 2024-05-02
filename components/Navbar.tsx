@@ -106,6 +106,7 @@ export default function Navbar() {
         </nav>
         <div className="flex flex-col items-start gap-4">
           <Link href="/login">Login</Link>
+          <Link href="/register">Register</Link>
           
         </div>
       </div>

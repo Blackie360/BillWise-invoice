@@ -16,12 +16,14 @@ import Lottie from 'lottie-react';
 import Loading from "@/components/Loading";
 import { useEffect } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 
 
 
 
 const New = () => {
+  const { data: session, status } = useSession();
   const [preview, setPreview] = useState(false)
   const [tableData, setTableData] = useState([])
   const[logoUrl, setLogoUrl] = useState('');
@@ -113,7 +115,23 @@ useEffect(() => {
   return () => clearTimeout(timer);
 }, []);
 
-
+if (status === "loading") {
+  return <Loading />;
+}
+if (status === "unauthenticated") {
+  return (
+    <div className="gap-8 flex items-center h-screen justify-center flex-col">
+  <h2 className="md:text-4xl text-2xl">
+    Please Login to be able to create an Invoice
+  </h2>
+  <Link 
+  className="text-blue-500 hover:underline text-3xl"
+  href="/login">
+    Login
+  </Link>
+</div>
+  )
+}
   return (
     <div className='bg-slate-50 text-black py-8 overflow-y-auto'>
   {/* header */}
