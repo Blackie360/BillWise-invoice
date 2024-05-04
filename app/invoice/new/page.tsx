@@ -1,22 +1,17 @@
 "use client";
 
+import FormPreview from "@/components/FormPreview";
+import FormTable from "@/components/FormTable";
+import Loading from "@/components/Loading";
+import { useSession } from "next-auth/react";
+import { CldImage, CldUploadButton } from "next-cloudinary";
+import Link from "next/link";
+import { SetStateAction, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";
-import { useReactToPrint } from 'react-to-print';
 import { FaPrint, FaRegFileLines } from "react-icons/fa6";
 import { MdPreview } from "react-icons/md";
-import { IoSaveSharp } from "react-icons/io5";
-import { MdOutlineSend } from "react-icons/md";
-import { SetStateAction, useRef, useState } from "react";
-import FormPreview from "@/components/FormPreview";
-import { FaCloudUploadAlt } from "react-icons/fa";
-import FormTable from "@/components/FormTable";
-import { CldImage, CldUploadButton } from "next-cloudinary";
-import toast from "react-hot-toast";
-import Lottie from 'lottie-react';
-import Loading from "@/components/Loading";
-import { useEffect } from "react";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useReactToPrint } from 'react-to-print';
 
 
 

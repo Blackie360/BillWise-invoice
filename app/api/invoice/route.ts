@@ -74,7 +74,7 @@ export async function POST(request: { json: () => PromiseLike<{ invoiceData: any
 
 
 
-export async function GET(request: { nextUrl: { searchParams: { get: (arg0: string) => any; }; }; }, { searchParams }: any) {
+export async function GET(request, searchParams) {
     try {
       const userId = request.nextUrl.searchParams.get("userId");
       console.log(`The userId is${userId}`);
