@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { BiMenu } from "react-icons/bi";
+import ThemeLink from "./ThemeLink";
 import { AiOutlineClose } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-
 import { signOut, useSession } from "next-auth/react";
 import Loading from "./Loading";
 export default function Navbar() {
@@ -24,10 +24,9 @@ export default function Navbar() {
   // if (status === "authenticated") {
   //   return <p>Signed in as {session.user.email}</p>;
   // }
-  function getInitials(fullName: string) {
+  function getInitials(fullName) {
     // Split the full name into words
     const words = fullName.split(" ");
-
     let initials = "";
     for (let i = 0; i < words.length; i++) {
       initials += words[i][0];
@@ -43,7 +42,7 @@ export default function Navbar() {
     <>
       <header className="bg-violet-700 fixed top-0 right-0 w-full left-0 h-16 flex items-center justify-between px-16 text-slate-50 z-50">
         <Link className="font-bold text-2xl md:text-4xl" href="/">
-          Invoicer
+         BillWise
         </Link>
 
         <nav className="hidden sm:flex items-center gap-3">
@@ -61,9 +60,9 @@ export default function Navbar() {
               </div>
 
               <div className="font-medium dark:text-white">
-                <div>{session?.user?.name ?? ""}</div>
+                <div>{session.user.name}</div>
                 <div className="text-sm text-slate-50 dark:text-slate-400">
-                  {session?.user?.email ?? ""}
+                  {session.user.email}
                 </div>
               </div>
             </div>
@@ -78,7 +77,11 @@ export default function Navbar() {
         ) : (
           <div className="hidden sm:flex items-center gap-4">
             <Link href="/login">Login</Link>
-            
+            <ThemeLink
+              className="bg-orange-600 hover:bg-orange-700 focus:ring-orange-300"
+              title="Register"
+              href="/register"
+            />
           </div>
         )}
         {/* Humberg menu */}
@@ -103,11 +106,15 @@ export default function Navbar() {
           <Link href="/">Features</Link>
           <Link href="/">Pricing</Link>
           <Link href="/">Free Tools</Link>
+          {status === "authenticated" && <a href="/invoice">View Invoices</a>}
         </nav>
         <div className="flex flex-col items-start gap-4">
           <Link href="/login">Login</Link>
-          <Link href="/register">Register</Link>
-          
+          <ThemeLink
+            className="bg-orange-600 hover:bg-orange-700 focus:ring-orange-300"
+            title="Register"
+            href="/register"
+          />
         </div>
       </div>
     </>

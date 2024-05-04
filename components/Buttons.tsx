@@ -19,10 +19,11 @@ const Buttons = ({ invoiceId }: { invoiceId: string }) => {
         try {
             e.preventDefault();
             setLoading(true); // Set loading state to true
-            const baseUrl = 'http://localhost:3000';
+            const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
             const invoiceUrl = `${baseUrl}/invoice/${invoiceId}`;
+           
             console.log(email, invoiceUrl);
-            const response = await fetch("http://localhost:3000/api/send", {
+            const response = await fetch(`${baseUrl}/api/send`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
