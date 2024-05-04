@@ -1,9 +1,6 @@
 import { authOptions } from "@/app/libs/authOptions";
-import NextAuth, { SessionStrategy } from "next-auth";
+import NextAuth from "next-auth";
 
-const handler = NextAuth({
-    ...authOptions,
-    session: { strategy: "jwt" as SessionStrategy },
-});
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
