@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const { createHash } = require('crypto');
 
 
-export async function POST(request: { json: () => PromiseLike<{ invoiceData: any; tableData: any; }> | { invoiceData: any; tableData: any; }; }) {
+export async function POST(request) {
     
     try {
         const { invoiceData, tableData } = await request.json();
