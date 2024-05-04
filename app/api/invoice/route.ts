@@ -71,8 +71,7 @@ export async function POST(request: { json: () => PromiseLike<{ invoiceData: any
     }
 
 }
-
-export async function GET(request, { searchParams }) {
+export async function GET(request, response) {
   try {
     const userId = request.nextUrl.searchParams.get("userId");
     console.log(`The userId is${userId}`);
@@ -83,10 +82,10 @@ export async function GET(request, { searchParams }) {
       where: { userId },
     });
     // console.log(invoices);
-    return NextResponse.json(invoices);
+    return response.json(invoices);
   } catch (error) {
     // console.log(error);
-    return NextResponse.json(
+    return response.json(
       {
         message: "Failed to fetch invoices",
         error,
