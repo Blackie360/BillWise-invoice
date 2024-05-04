@@ -1,8 +1,8 @@
 import React from "react";
 import { getServerSession } from "next-auth";
 import ThemeLink from "@/components/ThemeLink";
-import { authOptions } from "../libs/authOptions";
 import { getInvoices } from "../libs/getInvoices";
+import authOptions from "../libs/authOptions";
 
 export default async function Page() {
   // const server
