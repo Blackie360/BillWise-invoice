@@ -6,7 +6,7 @@ import { FaPrint, FaRegFileLines } from "react-icons/fa6";
 import { MdPreview } from "react-icons/md";
 import { IoSaveSharp } from "react-icons/io5";
 import { MdOutlineSend } from "react-icons/md";
-import { useRef, useState } from "react";
+import { SetStateAction, useRef, useState } from "react";
 import FormPreview from "@/components/FormPreview";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import FormTable from "@/components/FormTable";
@@ -75,8 +75,9 @@ async function handleFormSubmit(e: { preventDefault: () => void; }) {
   
 
   try {
-    const response = await fetch('http://localhost:3000/api/invoice', {
-      method: 'POST',
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const response = await fetch(`${baseUrl}/api/invoice`, {
+            method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -106,7 +107,7 @@ async function handleFormSubmit(e: { preventDefault: () => void; }) {
 }
 console.log(combineData)
  // Function to update tableData when called by the Table component
- const updateTableData = (newTableData) => {
+ const updateTableData = (newTableData: SetStateAction<never[]>) => {
   setTableData(newTableData);
 };
 console.log(tableData)
@@ -114,12 +115,12 @@ console.log(tableData)
 const handlePrint = useReactToPrint({
   content: () => invoiceRef.current,
 });
-// Set the timeout to  (2 seconds) 
+// Set the timeout to  (1 seconds) 
 
 useEffect(() => {
   const timer = setTimeout(() => {
     setLoading(false);
-  }, 1000); 
+  }, 500); 
   return () => clearTimeout(timer);
 }, []);
 
@@ -148,7 +149,7 @@ if (status === "unauthenticated") {
   <div className="flex">
     <button
       onClick={() => setPreview(!preview)}
-      className="px-3 py-2 shadow rounded-sm border border-slate-600 mr-2 md:mr-0 md:mb-0 mb-2 md:mb-0"
+      className="px-3 py-2 shadow rounded-sm border border-slate-600 mr-2 md:mr-0 md:mb-0 mb-2 "
     >
       {preview ? (
         <div className="flex items-center space-x-2">
@@ -165,7 +166,7 @@ if (status === "unauthenticated") {
   </div>
   <div className="flex">
     <Link
-      href="/invoice/7"
+      href="/invoice"
       className="flex items-end space-x-2 px-3 py-2 shadow rounded-sm border border-slate-600 mr-2 md:mr-0 md:mb-0 mb-2 md:mb-0"
     >
       <FaRegFileLines />
@@ -198,32 +199,25 @@ if (status === "unauthenticated") {
     {/* image */}
 
 <div className="flex items-center justify-center ">
-{
-  logoUrl ? (
-    <CldImage
-        width="240"
-        height="240"
-        src={logoUrl}
-        alt="invoice logo"
-          />
-
-  ): (
-    <div>
-      <CldUploadButton
-            className='mb-2 text-sm text-gray-500 dark:text-gray-400
-            flex flex-col items-center justify-center w-full md:w-64 h-48 md:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100'
-                onUpload={(data) => {
-                    console.log(data);
-                    if (typeof data.info !== 'string') {
-                        setLogoUrl(data.info?.secure_url || ''); // Fix: Provide a default value of an empty string
-                    }
-                }}
-                uploadPreset="Invoicepreset"
-            />
-      </div>
-
-  )
-}
+{logoUrl ? (
+                <CldImage
+                  width="240"
+                  height="240"
+                  src={logoUrl}
+                  alt="Invoice Logo"
+                />
+              ) : (
+                <div>
+                  <CldUploadButton
+                    className="flex flex-col items-center justify-center w-48 h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 text-sm text-gray-500 dark:text-gray-400"
+                    onUpload={(data) => {
+                      console.log(data.info.secure_url);
+                      setLogoUrl(data.info.secure_url);
+                    }}
+                    uploadPreset="InvoicePreset"
+                  />
+                </div>
+              )}
 </div> 
     <h2 className="text-4xl uppercase font-bold">Invoice</h2>
   </div>

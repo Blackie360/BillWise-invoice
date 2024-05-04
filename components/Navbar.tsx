@@ -20,10 +20,7 @@ export default function Navbar() {
   if (status === "loading") {
     return <Loading />;
   }
-  console.log(status);
-  // if (status === "authenticated") {
-  //   return <p>Signed in as {session.user.email}</p>;
-  // }
+
   function getInitials(fullName) {
     // Split the full name into words
     const words = fullName.split(" ");
@@ -47,8 +44,8 @@ export default function Navbar() {
 
         <nav className="hidden sm:flex items-center gap-3">
           <Link href="/">Features</Link>
-          <Link href="/">Pricing</Link>
-          <Link href="/">Free Tools</Link>
+          <Link href="#pricing">Pricing</Link>
+          
         </nav>
         {status === "authenticated" ? (
           <div className="flex items-center gap-4">
