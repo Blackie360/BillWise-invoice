@@ -72,28 +72,26 @@ export async function POST(request: { json: () => PromiseLike<{ invoiceData: any
 
 }
 
-
-
-export async function GET(request, searchParams) {
-    try {
-      const userId = request.nextUrl.searchParams.get("userId");
-      console.log(`The userId is${userId}`);
-      const invoices = await db.invoice.findMany({
-        include: {
-          tableData: true,
-        },
-        where: { userId },
-      });
-      // console.log(invoices);
-      return NextResponse.json(invoices);
-    } catch (error) {
-      // console.log(error);
-      return NextResponse.json(
-        {
-          message: "Failed to fetch invoices",
-          error,
-        },
-        { status: 500 }
-      );
-    }
+export async function GET(request, { searchParams }) {
+  try {
+    const userId = request.nextUrl.searchParams.get("userId");
+    console.log(`The userId is${userId}`);
+    const invoices = await db.invoice.findMany({
+      include: {
+        tableData: true,
+      },
+      where: { userId },
+    });
+    // console.log(invoices);
+    return NextResponse.json(invoices);
+  } catch (error) {
+    // console.log(error);
+    return NextResponse.json(
+      {
+        message: "Failed to fetch invoices",
+        error,
+      },
+      { status: 500 }
+    );
   }
+}
