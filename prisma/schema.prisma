@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,32 +9,27 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model Invoice {
-  id               Int      @id @default(autoincrement())
-  company          String
-  name             String
-  postalCode       String?
-  companyAddress   String
-  city             String
-  country          String
-  clientCompany    String
-  clientAddress    String
-  clientCity       String
-  clientCountry    String
-  clientPostalCode String
-  invoiceNumber    String
-  invoiceDate      DateTime
-  dueDate          DateTime
-  logoUrl          String
-  notes            String
-  terms            String
-  tableData        Row[]   // Define a one-to-many relationship to Row
-  user    User     @relation(fields: [userId], references: [email])
+  id           Int      @id @default(autoincrement())
+  companyName  String
+  invoiceAuthor String
+  companyAddress String
+  companyCity   String
+  companyCountry String
+  clientCompany String
+  clientAddress String
+  clientCity    String
+  clientCountry String
+  invoiceNumber String
+  invoiceDate   DateTime
+  invoiceDueDate DateTime
+  notes         String
+  terms         String
+  logoUrl       String
+  tableData    Row[]   // Define a one-to-many relationship to Row
+   user    User     @relation(fields: [userId], references: [email])
   userId  String
 }
-
-
 model Row {
   id            Int       @id @default(autoincrement())
   itemDescription String
@@ -53,7 +45,5 @@ model User {
   email   String   @unique
   name    String?
   password String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   invoices   Invoice[]
 }
