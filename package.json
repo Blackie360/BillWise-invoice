@@ -15,6 +15,7 @@
     "@react-email/button": "0.0.10",
     "@react-email/html": "0.0.4",
     "@react-email/link": "0.0.5",
+    "@vercel/analytics": "^1.2.2",
     "bcrypt": "^5.1.1",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.4",

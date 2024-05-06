@@ -4,6 +4,7 @@ import "../styles/main.scss";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/context/AuthProvider";
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
           <Toaster position="top-right" reverseOrder={false} />
           <Navbar />
           <div className="mt-16">{children}</div>
+          <Analytics />
           <Footer />
         </AuthProvider>
       </body>
