@@ -143,7 +143,7 @@ export default function FormTable({ updateTableData }) {
           <button
             onClick={addRow}
             type="button"
-            className="my-3 flex items-center space-x-2 text-purple-600 font-bold"
+            className="my-3 flex items-center space-x-2 text-orange-600 font-bold"
           >
             <AiOutlinePlus className="text-base" />
             <span>Add line item</span>
