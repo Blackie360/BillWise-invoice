@@ -8,7 +8,7 @@ export default function Footer() {
           href="#"
           className="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          BillWise
+          Invoicer
         </a>
         <p className="my-6 text-gray-500 dark:text-gray-400">
           Free Open source Platform for making invoices for entirely free

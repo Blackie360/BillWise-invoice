@@ -40,9 +40,9 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="bg-green-700 fixed top-0 right-0 w-full left-0 h-16 flex items-center justify-between px-16 text-slate-50 z-50">
+      <header className="bg-violet-700 fixed top-0 right-0 w-full left-0 h-16 flex items-center justify-between px-16 text-slate-50 z-50">
         <Link className="font-bold text-2xl md:text-4xl" href="/">
-         BillWise 💸
+          Invoicer
         </Link>
 
         <nav className="hidden sm:flex items-center gap-3">
@@ -78,7 +78,7 @@ export default function Navbar() {
           <div className="hidden sm:flex items-center gap-4">
             <Link href="/login">Login</Link>
             <ThemeLink
-              className="bg-orange-600 hover:bg-orange-700 focus:ring-orange-300"
+              className="bg-rose-600 hover:bg-rose-700 focus:ring-rose-300"
               title="Register"
               href="/register"
             />
@@ -111,7 +111,7 @@ export default function Navbar() {
         <div className="flex flex-col items-start gap-4">
           <Link href="/login">Login</Link>
           <ThemeLink
-            className="bg-orange-600 hover:bg-orange-700 focus:ring-orange-300"
+            className="bg-rose-600 hover:bg-rose-700 focus:ring-rose-300"
             title="Register"
             href="/register"
           />

@@ -71,7 +71,7 @@ export default function Features() {
         })}
       </div>
       <ThemeLink
-        className="bg-green-600 hover:bg-green-700 focus:ring-green-300"
+        className="bg-purple-600 hover:bg-purple-700 focus:ring-purple-300"
         title="Create Invoice for Free"
         href="/invoice/new"
       />

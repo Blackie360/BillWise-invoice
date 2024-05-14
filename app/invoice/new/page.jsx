@@ -108,7 +108,7 @@ export default function CreateInvoice() {
           Please Login to be able to create your first Invoice
         </h2>
         <ThemeLink
-          className="bg-orange-600 hover:bg-orange-700 focus:ring-orange-300"
+          className="bg-rose-600 hover:bg-rose-700 focus:ring-rose-300"
           title="Click here to Login to your Account"
           href="/login"
         />
@@ -363,7 +363,7 @@ export default function CreateInvoice() {
             <button
               disabled
               type="button"
-              className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800 inline-flex items-center"
+              className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800 inline-flex items-center"
             >
               <svg
                 aria-hidden="true"
@@ -386,7 +386,7 @@ export default function CreateInvoice() {
             </button>
           ) : (
             <button
-              className="bg-orange-600 py-2.5 px-6 text-white rounded"
+              className="bg-purple-600 py-2.5 px-6 text-white rounded"
               type="submit"
             >
               Create Invoice

@@ -15,8 +15,8 @@ export default function Pricing() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white shadow-2xl rounded-lg p-12 fle flex-col ">
             {/* icon */}
-            <div className="flex items-center justify-center rounded-full w-16 h-16 bg-green-100 mb-6">
-              <BsCheck2Circle className="text-3xl backdrop:placeholder:file:text-green-500" />
+            <div className="flex items-center justify-center rounded-full w-16 h-16 bg-purple-100 mb-6">
+              <BsCheck2Circle className="text-3xl backdrop:placeholder:file:text-purple-500" />
             </div>
             <h4 className="mb-6 text-2xl font-bold text-slate-900">
               Free Plan
@@ -27,7 +27,7 @@ export default function Pricing() {
               more. No hidden charges.
             </p>
             <Link
-              className="font-bold text-green-700 hover:text-green-800"
+              className="font-bold text-purple-700 hover:text-purple-800"
               href="/invoice/new"
             >
               Create Free Invoice
@@ -35,8 +35,8 @@ export default function Pricing() {
           </div>
           <div className="bg-white shadow-2xl rounded-lg p-12 fle flex-col ">
             {/* icon */}
-            <div className="flex items-center justify-center rounded-full w-16 h-16 bg-green-100 mb-6">
-              <IoDiamondOutline className="text-3xl backdrop:placeholder:file:text-green-500" />
+            <div className="flex items-center justify-center rounded-full w-16 h-16 bg-purple-100 mb-6">
+              <IoDiamondOutline className="text-3xl backdrop:placeholder:file:text-purple-500" />
             </div>
             <h4 className="mb-6 text-2xl font-bold text-slate-900">
               Premium Plan
@@ -46,7 +46,7 @@ export default function Pricing() {
               features at minimal cost.
             </p>
             <Link
-              className="text-green-700 hover:text-green-800 font-bold"
+              className="text-purple-700 hover:text-purple-800 font-bold"
               href="/features"
             >
               Explore Premium Features
