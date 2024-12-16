@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Invoice Generator App
 
-## Getting Started
+Welcome to the Invoice Generator App project! This app is designed to simplify the process of creating, managing, and sending invoices. Whether you're a business owner or a developer looking to learn, this project has something for everyone.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern Landing Page:** Impress clients with a stunning and professional landing page.
+- **Invoice Creation:** Generate invoices with ease, including logo upload and loading spinners.
+- **Download and Print:** Allow users to download and print their invoices effortlessly.
+- **Cloud Storage:** Securely store invoices in the cloud for easy access from anywhere.
+- **Email Integration:** Send invoices via email, making business communication seamless.
+- **Authentication System:** Ensure secure access to the app for users.
+- **Single Invoice View:** Explore individual invoices with a user-friendly interface.
+- **Source Code:** Access and customize the source code for learning and customization.
+
+## Installation
+
+To run this project locally, follow these steps:
+
+1. Get the Source Code.
+   `Grab the Link from Video Description`
+2. Create a `.env` file in the project root directory and add the following keys:
+
+   ```dotenv
+   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+   DATABASE_URL=
+   RESEND_API_KEY=
+   NEXTAUTH_URL=
+   NEXT_PUBLIC_BASE_URL=
+   NEXTAUTH_SECRET=
+
+   ```
+
+## Install the project dependencies.
+
+`cd invoice-generator-app
+npm install`
+
+## Modify all fetch requests in the following components to use the NEXT_PUBLIC_BASE_URL from the environmental variables:
+
+1. RegisterForm Component
+2. Create Invoice page component
+3. ActionButons Component
+4. Fetch requests in the getInvoices and getInvoiceById functions in the libs folder.
+
+## Modify the Prisma schema in the schema.prisma file to include the relationships between User, Invoice, and Row models.
+
+```
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model Invoice {
+  id           Int      @id @default(autoincrement())
+  companyName  String
+  invoiceAuthor String
+  companyAddress String
+  companyCity   String
+  companyCountry String
+  clientCompany String
+  clientAddress String
+  clientCity    String
+  clientCountry String
+  invoiceNumber String
+  invoiceDate   DateTime
+  invoiceDueDate DateTime
+  notes         String
+  terms         String
+  logoUrl       String
+  tableData    Row[]   // Define a one-to-many relationship to Row
+   user    User     @relation(fields: [userId], references: [email])
+  userId  String
+}
+model Row {
+  id            Int       @id @default(autoincrement())
+  itemDescription String
+  qty            Int
+  unitPrice      Float
+  tax            Float
+  amount         Float
+  invoiceId      Int      // Define a foreign key relationship to Invoice
+  invoice        Invoice  @relation(fields: [invoiceId], references: [id])
+}
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  password String
+  invoices   Invoice[]
+}
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Update the package.json file to include a postinstall command for Prisma generation:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+   "scripts": {
+   "dev": "next dev",
+   "build": "next build",
+   "start": "next start",
+   "lint": "next lint",
+   "postinstall": "prisma generate"
+   }
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
 
-## Learn More
+Start the development server.
 
-To learn more about Next.js, take a look at the following resources:
+Open your web browser and visit http://localhost:3000 to access the app.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+We welcome contributions from the community. If you'd like to contribute to this project, please follow our [Contribution Guidelines](CONTRIBUTING.md).
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
+
+If you have any questions or feedback, feel free to contact us at your@email.com.
+
+---
+
+Thank you for supporting our project! Enjoy the Invoice Generator App and happy invoicing!
+
+# invoice-app-deployment
